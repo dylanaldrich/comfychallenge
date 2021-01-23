@@ -18,7 +18,7 @@
             const inputArr = inputString
                 .trim() // remove leading/trailing spaces
                 .toLowerCase() // make all words lowercase
-                .replace(/[^0-9a-z'\s]/g, " ") // remove punctuation, except apostrophes
+                .replace(/[^0-9a-zØ-öø-ÿ'\s]/g, " ") // remove punctuation, except apostrophes
                 .replace(/\s+/g, " ") // remove extra spaces
                 .split(" "); // split string into array
 
@@ -56,7 +56,7 @@
             // split the string into an array of words
             var inputArr = inputString
                 .toLowerCase() // make all words lowercase
-                .replace(/[^0-9a-z'\s]/g, " ") // remove punctuation, except apostrophes
+                .replace(/[^0-9a-zØ-öø-ÿ'\s]/g, " ") // remove punctuation, except apostrophes
                 .replace(/\s+/g, " ") // remove extra spaces
                 .split(" "); // split string into array
 
