@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SOLUTION 1 -->
+    <script>
+        function wordCounter1() {
+            // clear the Output area (remove any previous results)
+            const outputArea = document.getElementById("output");
+            outputArea.innerHTML = "";
+
+            // access the user's input
+            const inputString = document.getElementById("input").value;
+
+            // split the string into an array of words
+            const inputArr = inputString
+                .replace(/[^0-9A-Za-z'\s]/g, "") // remove punctuation, except apostrophes
+                .replace(/\s+/g, " ") // remove extra spaces
+                .split(" "); // split string into array
+
+            // create a new array with only unique words
+            const uniqueWords = [...new Set(inputArr)];
+            
+            // loop through the uniqueWords array to count occurrences
+            uniqueWords.forEach(word => {
+                const regex = new RegExp(`\\b${word}\\b(?!')`, "gi"); // regex for which word to match, with word boundaries and apostrophe check
+                let count = (inputString.match(regex) || []).length; // the number of times it appears in the original inputString
+                
+                // Add the info to the DOM
+                const result = document.createElement("P");
+                let text = document.createTextNode(`${word} = ${count}`);
+                result.appendChild(text);
+                outputArea.appendChild(result);
+            });
+        }
+    </script>
+    <!-- END SOLUTION 1 -->
+
+
+    <!-- SOLUTION 2 -->
+    <script>
+        function wordCounter2() {
+            // clear the Output area (remove any previous results)
+            var outputArea = document.getElementById("output");
+            outputArea.innerHTML = "";
+
+            // access the user's input
+            var inputString = document.getElementById("input").value;
+
+            // split the string into an array of words
+            var inputArr = inputString
+                .toLowerCase() // make all words lowercase
+                .replace(/[^0-9a-z'\s]/g, "") // remove punctuation, except apostrophes
+                .replace(/\s+/g, " ") // remove extra spaces
+                .split(" "); // split string into array
+
+            // create a new array with only unique words
+            var uniqueWords = [...new Set(inputArr)];
+
+            // loop through the uniqueWords array to count occurrences of each word
+            for(var i = 0; i < uniqueWords.length; i++) {
+                var currentWord = uniqueWords[i]; // isolate currentWord
+                var count = 0; // initialize counter at 0
+
+                // loop through inputArr and count the occurrences of currentWord
+                for(var j = 0; j < inputArr.length; j++) {
+                    if(currentWord === inputArr[j]) {
+                        count = count + 1;
+                    }
+                }
+
+                // Add the info to the DOM
+                var result = document.createElement("P");
+                var text = document.createTextNode(currentWord + " = " + count);
+                result.appendChild(text);
+                outputArea.appendChild(result);
+            }
+        }
+    </script>
+    <!-- END SOLUTION 2 -->
+
+    <title>Word Counter</title>
+</head>
+<body>
+    <p>Anyway, I keep picturing all these little kids playing some game in this big field of rye and all. Thousands of little kids, and nobody's around - nobody big, I mean - except me. And I'm standing on the edge of some crazy cliff. What I have to do, I have to catch everybody if they start to go over the cliff - I mean if they're running and they don't look where they're going I have to come out from somewhere and catch them. That's all I do all day. I'd just be the catcher in the rye and all. I know it's crazy, but that's the only thing I'd really like to be.</p>
+    <p>Input:</p>
+    <textarea id="input" cols="30" rows="10" onfocus=this.value=''></textarea>
+    <br>
+    <button onclick="return wordCounter1();">Submit (Solution 1)</button>
+    <button onclick="return wordCounter2();">Submit (Solution 2)</button>
+
+    <p>Output:</p>
+    <section id="output"></section>
+
+</body>
+</html>
