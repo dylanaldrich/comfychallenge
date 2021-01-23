@@ -16,8 +16,9 @@
 
             // split the string into an array of words
             const inputArr = inputString
+                .trim() // remove leading/trailing spaces
                 .toLowerCase() // make all words lowercase
-                .replace(/[^0-9a-z'\s]/g, "") // remove punctuation, except apostrophes
+                .replace(/[^0-9a-z'\s]/g, " ") // remove punctuation, except apostrophes
                 .replace(/\s+/g, " ") // remove extra spaces
                 .split(" "); // split string into array
 
@@ -29,11 +30,12 @@
                 const regex = new RegExp(`\\b${word}\\b(?!')`, "gi"); // regex for which word to match, with word boundaries and apostrophe check
                 let count = (inputString.match(regex) || []).length; // the number of times it appears in the original inputString
                 
-                // Add the info to the DOM
+                // Add the results to the DOM
                 const result = document.createElement("P");
                 let text = document.createTextNode(`${word} = ${count}`);
                 result.appendChild(text);
                 outputArea.appendChild(result);
+                document.querySelector("h3").innerHTML = "Output: Solution 1";
             });
         }
     </script>
@@ -53,7 +55,7 @@
             // split the string into an array of words
             var inputArr = inputString
                 .toLowerCase() // make all words lowercase
-                .replace(/[^0-9a-z'\s]/g, "") // remove punctuation, except apostrophes
+                .replace(/[^0-9a-z'\s]/g, " ") // remove punctuation, except apostrophes
                 .replace(/\s+/g, " ") // remove extra spaces
                 .split(" "); // split string into array
 
@@ -63,6 +65,7 @@
             // loop through the uniqueWords array to count occurrences of each word
             for(var i = 0; i < uniqueWords.length; i++) {
                 var currentWord = uniqueWords[i]; // isolate currentWord
+                if(currentWord === "") continue; // skip any blank words
                 var count = 0; // initialize counter at 0
 
                 // loop through inputArr and count the occurrences of currentWord
@@ -72,11 +75,12 @@
                     }
                 }
 
-                // Add the info to the DOM
+                // Add the results to the DOM
                 var result = document.createElement("P");
                 var text = document.createTextNode(currentWord + " = " + count);
                 result.appendChild(text);
                 outputArea.appendChild(result);
+                document.querySelector("h3").innerHTML = "Output: Solution 2";
             }
         }
     </script>
@@ -97,7 +101,7 @@
         }
 
         #results p {
-            margin: 5px;
+            margin: 5px 10px;
         }
     </style>
 
@@ -107,7 +111,7 @@
     <section class="input">
         <h1>Word Counter 3000</h1>
         <p>Put any text into the input box, then click one of the buttons to find out how many times each word of your input occurs in the text.</p>
-        <p>Need inspiration? Copy and paste this into the input box:</p>
+        <p>Need inspiration? Copy and paste this JD Salinger quote into the input box:</p>
         <blockquote>"Anyway, I keep picturing all these little kids playing some game in this big field of rye and all. Thousands of little kids, and nobody's around - nobody big, I mean - except me. And I'm standing on the edge of some crazy cliff. What I have to do, I have to catch everybody if they start to go over the cliff - I mean if they're running and they don't look where they're going I have to come out from somewhere and catch them. That's all I do all day. I'd just be the catcher in the rye and all. I know it's crazy, but that's the only thing I'd really like to be."</blockquote>
         <p>Input:</p>
         <textarea id="input" cols="30" rows="10" onfocus=this.value=''></textarea>
@@ -117,7 +121,7 @@
     </section>
 
     <section id="output">
-        <h3>Output:</h3>
+        <h3>Output: TBD</h3>
         <div id="results"></div>
     </section>
 
