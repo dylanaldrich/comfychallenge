@@ -27,6 +27,7 @@
             
             // loop through the uniqueWords array to count occurrences
             uniqueWords.forEach(word => {
+                if(word === "") return; // skip any blank words
                 const regex = new RegExp(`\\b${word}\\b(?!')`, "gi"); // regex for which word to match, with word boundaries and apostrophe check
                 let count = (inputString.match(regex) || []).length; // the number of times it appears in the original inputString
                 
